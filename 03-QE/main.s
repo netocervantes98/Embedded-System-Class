@@ -20,5 +20,25 @@ _start:
 
         mov r2, r0, LSL #7
         mov r3, r0, LSL #8
+
+        
+        @ IC4 Non Conditional Execution: 
+        ldr r4, =0xA5A5A5A5
+        mov r5, #1
+        mov r6, #1
+        cmp r5, r6
+        bne skip1
+        str r4, [r1,#0x00]
+        b done
+skip1:  str r4, [r1,#0x08]
+done:   nop
+        @  Conditional Execution: 
+        ldr r4, =0xA5A5A5A5
+        mov r5, #1
+        mov r6, #0
+        @ Add your code here
+        cmp r5, r6        
+        streq r4, [r1,#0x00]
+        strne r4, [r1,#0x08]
         nop
 stop:   b stop
