@@ -15,8 +15,9 @@ dd if=main.bin of=flash.bin bs=4096 conv=notrunc;
 
 qemu-system-arm -M connex -drive file=flash.bin,if=pflash,format=raw -nographic -serial /dev/null
 
-xp /16xb 0xA0000000
 xp /64xb 0xA0000000
+
+xp /16xb 0xA0000000
 
 qemu-system-arm -S -M connex -drive file=flash.bin,if=pflash,format=raw -nographic -serial /dev/null
 gdb-multiarch -ex 'file startup.elf' -ex 'target remote localhost:1234' ;
